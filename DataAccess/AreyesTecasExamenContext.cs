@@ -27,17 +27,17 @@ public partial class AreyesTecasExamenContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-2POFP3ID; Database= AReyesTecasExamen; Trusted_Connection=True; User ID=sa; Password=pass@word1; Encrypt=False;");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-AVT6ORL\\SQLEXPRESS;Initial Catalog=AReyesTecasExamen;Integrated Security=True; Encrypt=False;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cliente>(entity =>
         {
-            entity.HasKey(e => e.IdCliente).HasName("PK__Cliente__D5946642003A1A9E");
+            entity.HasKey(e => e.IdCliente).HasName("PK__Cliente__D594664257538D99");
 
-            entity.ToTable("Cliente");
+            entity.ToTable("Cliente", tb => tb.HasTrigger("ClienteNumeroClinete"));
 
-            entity.HasIndex(e => e.NumeroCliente, "UQ__Cliente__28D658263E1A2519").IsUnique();
+            entity.HasIndex(e => e.NumeroCliente, "UQ__Cliente__28D65826C0FD58AC").IsUnique();
 
             entity.Property(e => e.ApellidoMaterno)
                 .HasMaxLength(50)
@@ -69,12 +69,12 @@ public partial class AreyesTecasExamenContext : DbContext
 
             entity.HasOne(d => d.IdRolNavigation).WithMany(p => p.Clientes)
                 .HasForeignKey(d => d.IdRol)
-                .HasConstraintName("FK__Cliente__IdRol__1367E606");
+                .HasConstraintName("FK__Cliente__IdRol__44FF419A");
         });
 
         modelBuilder.Entity<Cuentum>(entity =>
         {
-            entity.HasKey(e => e.IdNumeroCuenta).HasName("PK__Cuenta__A0B313B54C7DC23A");
+            entity.HasKey(e => e.IdNumeroCuenta).HasName("PK__Cuenta__A0B313B59BFB5FE1");
 
             entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
             entity.Property(e => e.Nombre)
@@ -84,12 +84,12 @@ public partial class AreyesTecasExamenContext : DbContext
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Cuenta)
                 .HasForeignKey(d => d.IdCliente)
-                .HasConstraintName("FK__Cuenta__IdClient__164452B1");
+                .HasConstraintName("FK__Cuenta__IdClient__45F365D3");
         });
 
         modelBuilder.Entity<Rol>(entity =>
         {
-            entity.HasKey(e => e.IdRol).HasName("PK__Rol__B7702B004446CBD7");
+            entity.HasKey(e => e.IdRol).HasName("PK__Rol__2A49584CDF2A27F8");
 
             entity.ToTable("Rol");
 
@@ -100,7 +100,7 @@ public partial class AreyesTecasExamenContext : DbContext
 
         modelBuilder.Entity<TipoTransaccion>(entity =>
         {
-            entity.HasKey(e => e.IdTipoTransaccion).HasName("PK__TipoTran__FE769C8DF3D9FEAD");
+            entity.HasKey(e => e.IdTipoTransaccion).HasName("PK__TipoTran__FE769C8DC3A3E516");
 
             entity.ToTable("TipoTransaccion");
 
@@ -111,7 +111,7 @@ public partial class AreyesTecasExamenContext : DbContext
 
         modelBuilder.Entity<Transaccion>(entity =>
         {
-            entity.HasKey(e => e.IdTransaccion).HasName("PK__Transacc__334B1F77B3DE923F");
+            entity.HasKey(e => e.IdTransaccion).HasName("PK__Transacc__334B1F77FD608307");
 
             entity.ToTable("Transaccion");
 
@@ -121,12 +121,12 @@ public partial class AreyesTecasExamenContext : DbContext
 
             entity.HasOne(d => d.IdCuentaNavigation).WithMany(p => p.Transaccions)
                 .HasForeignKey(d => d.IdCuenta)
-                .HasConstraintName("FK__Transacci__IdCue__1BFD2C07");
+                .HasConstraintName("FK__Transacci__IdCue__47DBAE45");
 
             entity.HasOne(d => d.IdTipoTransaccionNavigation).WithMany(p => p.Transaccions)
                 .HasForeignKey(d => d.IdTipoTransaccion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Transacci__IdTip__1B0907CE");
+                .HasConstraintName("FK__Transacci__IdTip__46E78A0C");
         });
 
         OnModelCreatingPartial(modelBuilder);

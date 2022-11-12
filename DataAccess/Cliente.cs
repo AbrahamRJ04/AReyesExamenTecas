@@ -32,8 +32,6 @@ public partial class Cliente
     public virtual ICollection<Cuentum> Cuenta { get; } = new List<Cuentum>();
 
     public virtual Rol? IdRolNavigation { get; set; }
-
-
     /*PROPIEDADES AGREGADAS POR APARTE*/
 
     public string TipoRol { get; set; }
