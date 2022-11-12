@@ -13,7 +13,7 @@ public partial class Transaccion
 
     public DateTime FechaTransaccion { get; set; }
 
-    public int? IdCuenta { get; set; }
+    public int? IdNumeroCuenta { get; set; }
 
     public decimal MontoTransaccion { get; set; }
 

@@ -15,6 +15,7 @@ namespace Business
         public string FechaCreacion { get; set; }
         public int IdCliente { get; set; }
         public List<Object> Cuentas { get; set; }
+        public Business.Transaccion Transaccion { get; set; }
 
         public static Business.ControlResult GetAll(int IdCliente)
         {

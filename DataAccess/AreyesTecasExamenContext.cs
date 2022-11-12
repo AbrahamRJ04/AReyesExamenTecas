@@ -120,7 +120,7 @@ public partial class AreyesTecasExamenContext : DbContext
             entity.Property(e => e.MontoTransaccion).HasColumnType("decimal(18, 0)");
 
             entity.HasOne(d => d.IdCuentaNavigation).WithMany(p => p.Transaccions)
-                .HasForeignKey(d => d.IdCuenta)
+                .HasForeignKey(d => d.IdNumeroCuenta)
                 .HasConstraintName("FK__Transacci__IdCue__47DBAE45");
 
             entity.HasOne(d => d.IdTipoTransaccionNavigation).WithMany(p => p.Transaccions)

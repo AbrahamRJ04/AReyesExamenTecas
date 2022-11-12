@@ -144,7 +144,7 @@ namespace Presentation.Controllers
             else
             {
                 ViewBag.Mensaje = "Ocurrio un error al registrar la cuenta de ahorro nueva";
-                
+
             }
             return PartialView("Modal");
         }
@@ -156,7 +156,7 @@ namespace Presentation.Controllers
             if (result.ProcesoCorrecto)
             {
                 Business.ControlResult result1 = Business.Cuenta.GetById(IdNumeroCuenta);
-                if(result1.ProcesoCorrecto)
+                if (result1.ProcesoCorrecto)
                 {
                     Business.Cliente cliente = new Business.Cliente();
                     cliente = (Business.Cliente)result.Objeto;
@@ -182,14 +182,73 @@ namespace Presentation.Controllers
 
             }
             return PartialView("Modal");
-            
+
         }
+
+        [HttpGet]
+        public IActionResult Depositar(int IdNumeroCuenta, int IdCliente)
+        {
+            int Id = 1;
+            Business.ControlResult result = Business.Cliente.GetById(IdCliente);
+            if (result.ProcesoCorrecto)
+            {
+                Business.Cliente cliente = new Business.Cliente();
+                cliente = (Business.Cliente)result.Objeto;
+                Business.ControlResult resultcuenta = Business.Cuenta.GetById(IdNumeroCuenta);
+                if (resultcuenta.ProcesoCorrecto)
+                {
+                    cliente.Cuenta = (Business.Cuenta)resultcuenta.Objeto;
+                    Business.ControlResult catalogoTransacciones = Business.TipoTransaccion.GetById(Id);
+                    if (catalogoTransacciones.ProcesoCorrecto)
+                    {
+                        cliente.Cuenta.Transaccion = new Business.Transaccion();
+                        cliente.Cuenta.Transaccion.TipoTransaccion = (Business.TipoTransaccion)catalogoTransacciones.Objeto;
+                        return View(cliente);
+                    }
+                }
+            }
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult Depositar(Business.Cliente cliente)
+        {
+            Business.ControlResult resulttransac = new Business.ControlResult();
+            resulttransac.Objetos = new List<object>();
+
+            resulttransac.Objeto = cliente.Cuenta.Transaccion;
+
+            Business.ControlResult cuenta = Business.Cuenta.GetById(cliente.Cuenta.IdNumeroCuenta);
+            if (cuenta.ProcesoCorrecto)
+            {
+
+                cliente.Cuenta = (Business.Cuenta)cuenta.Objeto;
+                cliente.Cuenta.Transaccion = (Business.Transaccion)resulttransac.Objeto;
+
+                decimal SaldoActual = cliente.Cuenta.Saldo;
+                cliente.Cuenta.Saldo = SaldoActual + cliente.Cuenta.Transaccion.MontoTransaccion;
+                cliente.Cuenta.Transaccion.TipoTransaccion = new Business.TipoTransaccion();
+                cliente.Cuenta.Transaccion.TipoTransaccion.IdTipoTransaccion = 1;
+                Business.ControlResult result = Business.Transaccion.Depositar(cliente);
+                if (result.ProcesoCorrecto)
+                {
+                    ViewBag.Mensaje = "Deposito realizado con exito";
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Ocurrio un error al realizar el deposito. " + result.exception;
+                }
+            }
+            return PartialView("Modal");
+        }
+
 
         [HttpGet]
         public IActionResult DeleteCuenta(int IdNumeroCuenta)
         {
             Business.ControlResult result = Business.Cuenta.Delete(IdNumeroCuenta);
-            if(result.ProcesoCorrecto)
+            if (result.ProcesoCorrecto)
             {
                 ViewBag.Mensaje = "Cuenta eliminada correctamente";
             }
@@ -198,7 +257,7 @@ namespace Presentation.Controllers
                 ViewBag.Mensaje = "Ocurrio un error al registrar la cuenta de ahorro nueva";
             }
             return PartialView("Modal");
-            
+
         }
 
         public static byte[] ConvertToBytes(IFormFile imagen)
