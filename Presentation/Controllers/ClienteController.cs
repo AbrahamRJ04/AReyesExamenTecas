@@ -289,7 +289,7 @@ namespace Presentation.Controllers
                 {
                     cliente.Cuenta.Saldo = SaldoActual - cliente.Cuenta.Transaccion.MontoTransaccion;
                     cliente.Cuenta.Transaccion.TipoTransaccion = new Business.TipoTransaccion();
-                    cliente.Cuenta.Transaccion.TipoTransaccion.IdTipoTransaccion = 1;
+                    cliente.Cuenta.Transaccion.TipoTransaccion.IdTipoTransaccion = 2;
 
                     Business.ControlResult result = Business.Transaccion.Depositar(cliente);
                     if (result.ProcesoCorrecto)
