@@ -19,6 +19,8 @@ public partial class AreyesTecasExamenContext : DbContext
 
     public virtual DbSet<Cuentum> Cuenta { get; set; }
 
+    public virtual DbSet<HistorialTransaccione> HistorialTransacciones { get; set; }
+
     public virtual DbSet<Rol> Rols { get; set; }
 
     public virtual DbSet<TipoTransaccion> TipoTransaccions { get; set; }
@@ -87,6 +89,40 @@ public partial class AreyesTecasExamenContext : DbContext
                 .HasConstraintName("FK__Cuenta__IdClient__45F365D3");
         });
 
+        modelBuilder.Entity<HistorialTransaccione>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("HistorialTransacciones");
+
+            entity.Property(e => e.ApellidoMaterno)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ApellidoPaterno)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Detalle).IsUnicode(false);
+            entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
+            entity.Property(e => e.FechaTransaccion).HasColumnType("datetime");
+            entity.Property(e => e.MontoTransaccion).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.NombreDeCuenta)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.NumeroCliente)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Saldo).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.TipoRol)
+                .HasMaxLength(25)
+                .IsUnicode(false);
+            entity.Property(e => e.Transaccion)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Rol>(entity =>
         {
             entity.HasKey(e => e.IdRol).HasName("PK__Rol__2A49584CDF2A27F8");
@@ -119,7 +155,7 @@ public partial class AreyesTecasExamenContext : DbContext
             entity.Property(e => e.FechaTransaccion).HasColumnType("datetime");
             entity.Property(e => e.MontoTransaccion).HasColumnType("decimal(18, 0)");
 
-            entity.HasOne(d => d.IdCuentaNavigation).WithMany(p => p.Transaccions)
+            entity.HasOne(d => d.IdNumeroCuentaNavigation).WithMany(p => p.Transaccions)
                 .HasForeignKey(d => d.IdNumeroCuenta)
                 .HasConstraintName("FK__Transacci__IdCue__47DBAE45");
 

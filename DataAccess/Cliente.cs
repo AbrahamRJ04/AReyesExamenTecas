@@ -35,4 +35,5 @@ public partial class Cliente
     /*PROPIEDADES AGREGADAS POR APARTE*/
 
     public string TipoRol { get; set; }
+
 }

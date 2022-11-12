@@ -17,7 +17,7 @@ public partial class Transaccion
 
     public decimal MontoTransaccion { get; set; }
 
-    public virtual Cuentum? IdCuentaNavigation { get; set; }
+    public virtual Cuentum? IdNumeroCuentaNavigation { get; set; }
 
     public virtual TipoTransaccion IdTipoTransaccionNavigation { get; set; } = null!;
 }

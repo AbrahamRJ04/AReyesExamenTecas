@@ -24,11 +24,50 @@ COMPROBAR MODAL
 
 CRUD CUENTA
 
-GETBYID ---
+GETBYID --- ys
 ADD -- ya
 DELETE --YA 
-UPDATE --
+UPDATE -- ya
+____________________________________________
 
+
+IdTransaccion INT 
+IdTipoTransaccion INT 
+Detalle	Varchar
+FechaTransaccion 
+IdCuenta INT 
+MontoTransaccion L
+
+
+
+@IdTipoTransaccion INT,
+@Detalle VARCHAR(MAX),
+@IdNumeroCuenta INT,
+@MontoTransaccion DECIMAL,
+@Saldo DECIMAL
+
+ /*PROPIEDADES AGREGADAS POR APARTE*/
+
+    public string TipoRol { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+PENDIENTE REPORTE 
+
+
+
+
+
+YA SOLO CRUD
 
 
 
