@@ -1,0 +1,51 @@
+﻿@model Business.Cliente
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>LISTA DE CUENTAS DE: @Model.Nombre @Model.ApellidoPaterno @Model.ApellidoMaterno</h2>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione una Cuenta para moviemientos o + para agregar...</h5>
+        <hr />
+    </div>
+
+</div>
+<hr />
+
+<div style="float:right;">
+    @Html.ActionLink("+", "AddCuenta", "Cliente",new { IdCliente = @Model.IdCliente },new{@class = "btn btn-success"})
+    <hr />
+</div>
+
+<br>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr style="background-color:darkslategrey">
+            <td style="color:white">Editar</td>
+            <td style="visibility:collapse; display:none;">IdNumeroCuenta</td>
+            <td style="color:white">Nombre de la Cuenta</td>
+            <td style="color:white">Saldo</td>
+            <td style="color:white">Fecha de Creacion</td>
+            <td style="visibility:collapse; display:none;">IdCliente</td>
+            <td style="color:white">Eliminar</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Business.Cuenta cliente in Model.Cuenta.Cuentas)
+        {
+            <tr>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Cliente", new { IdCliente = cliente.IdCliente })"><i class="bi bi-pencil-square"></i></a></td>
+                <td style="visibility:collapse; display:none;">@cliente.IdNumeroCuneta</td>
+                <td>@cliente.Nombre </td>
+                <td>$ @cliente.Saldo</td>
+                <td>@cliente.FechaCreacion</td>
+                <td style="visibility:collapse; display:none;">@cliente.IdCliente</td>
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Cliente", new { IdCliente= cliente.IdCliente})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3-fill"></i></a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

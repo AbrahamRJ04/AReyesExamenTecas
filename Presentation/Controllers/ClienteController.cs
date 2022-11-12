@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataAccess;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
@@ -96,6 +97,33 @@ namespace Presentation.Controllers
                 ViewBag.Mensaje = "Ocurrio un error al intentar eliminar el cliente";
             }
             return PartialView("Modal");
+        }
+        
+
+        [HttpGet]
+        public IActionResult GetByIdCuenta(int IdCliente)
+        {
+            Business.ControlResult clientebase = Business.Cliente.GetById(IdCliente);
+            if (clientebase.ProcesoCorrecto)
+            {
+                Business.Cliente cliente = new Business.Cliente();
+                cliente = (Business.Cliente)clientebase.Objeto;
+                Business.ControlResult result = Business.Cuenta.GetAll(cliente.IdCliente);
+                if (result.ProcesoCorrecto)
+                {
+                    cliente.Cuenta = new Business.Cuenta();
+                    cliente.Cuenta.Cuentas = result.Objetos;
+
+                    return View(cliente);
+                }
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult AddCuenta(int IdCliente)
+        {
+            
+            return View();
         }
         public static byte[] ConvertToBytes(IFormFile imagen)
         {

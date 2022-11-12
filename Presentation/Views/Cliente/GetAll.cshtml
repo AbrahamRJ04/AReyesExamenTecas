@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h5>Seleccione un Clinete para editarlo o + para agregar...</h5>
+        <h5>Seleccione un Cliente para editarlo o + para agregar...</h5>
         <hr />
     </div>
 
@@ -62,7 +62,7 @@
                     {
                         //<img src="data:image/*;base64,@usuario.Imagen" style="width:100px; height:80px" />
                         <img src="~/Imagenes/UsuarioSinFoto.png" style="width:100px; height:80px" />
-                        
+
                     }
                     else
                     {
@@ -72,9 +72,9 @@
                     }
                 </td>
                 <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Cliente", new { IdCliente= cliente.IdCliente})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3-fill"></i></a></td>
-                <td><a class="btn btn-secondary" href="@Url.Action("Delete", "Cliente", new { IdCliente= cliente.IdCliente})");"><i class="bi bi-archive"></i></a></td>
+                <td><a class="btn btn-secondary" href="@Url.Action("GetByIdCuenta", "Cliente", new { IdCliente= cliente.IdCliente})" );"><i class="bi bi-archive"></i></a></td>
             </tr>
         }
-       
+
     </tbody>
 </table>
