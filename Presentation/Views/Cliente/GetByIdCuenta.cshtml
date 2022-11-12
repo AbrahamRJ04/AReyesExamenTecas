@@ -46,7 +46,7 @@
                 <td>@cliente.FechaCreacion</td>
                 <td style="visibility:collapse; display:none;">@cliente.IdCliente</td>
                 <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Depositar", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta, IdCliente = cliente.IdCliente})"><i class="bi bi-trash3-fill"></i></a></td>
-                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Retirar", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta})" onclick="return confirm('Decea retirar saldo de esta cuenta?');"><i class="bi bi-trash3-fill"></i></a></td>
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Retirar", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta , IdCliente = cliente.IdCliente})" onclick="return confirm('Decea retirar saldo de esta cuenta?');"><i class="bi bi-trash3-fill"></i></a></td>
                 <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("DeleteCuenta", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3-fill"></i></a></td>
             </tr>
         }

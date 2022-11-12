@@ -25,7 +25,7 @@ namespace Business
             {
                 using (DataAccess.AreyesTecasExamenContext context = new DataAccess.AreyesTecasExamenContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"Deposito {cliente.Cuenta.Transaccion.TipoTransaccion.IdTipoTransaccion},'{cliente.Cuenta.Transaccion.Detalle}',{cliente.Cuenta.IdNumeroCuenta},{cliente.Cuenta.Transaccion.MontoTransaccion},{cliente.Cuenta.Saldo}");
+                    var query = context.Database.ExecuteSqlRaw($"AccionTransaccion  {cliente.Cuenta.Transaccion.TipoTransaccion.IdTipoTransaccion},'{cliente.Cuenta.Transaccion.Detalle}',{cliente.Cuenta.IdNumeroCuenta},{cliente.Cuenta.Transaccion.MontoTransaccion},{cliente.Cuenta.Saldo}");
                     if (query > 0)
                     {
                         result.ProcesoCorrecto = true;

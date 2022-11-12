@@ -25,7 +25,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            @using (Html.BeginForm("Depositar", "Cliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Retirar", "Cliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
 
                 <div style="visibility:collapse; display:none;">
@@ -52,7 +52,7 @@
 
                     </div>
                 </div>
-               
+
                 <div class="row">
 
                     <div class="col-md-3">
@@ -77,13 +77,13 @@
 
                     <div class="col-md-3">
                         <hr />
-                        <input type="submit" value="DEPOSITAR" class="btn btn-outline-success btn-lg" />
+                        <input type="submit" value="RETIRAR" class="btn btn-outline-success btn-lg" />
                         @Html.ActionLink("CANCELAR", "GetAll", "Cliente", htmlAttributes: new { @class = "btn btn-outline-danger btn-lg" })
                         <hr />
                     </div>
                 </div>
 
-               
+
 
             }
         </div>
