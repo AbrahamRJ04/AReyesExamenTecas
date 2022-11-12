@@ -1,0 +1,244 @@
+﻿@model Business.Cliente
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="row">
+
+    <div class="container">
+        <div class="col-md-12">
+            <h2>CLIENTE</h2>
+            <h5>Ingrese los datos del cliente:</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @*Crea un salto de linea*@
+            <hr />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Cliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div style="visibility:collapse; display:none;">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.IdCliente)
+                        @Html.TextBoxFor(model => model.IdCliente, new { @class = "form-control", @id = "txtIdCliente" })
+                        @Html.ValidationMessageFor(model => model.IdCliente)
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Nombre) @Html.ValidationMessageFor(model => model.Nombre,"", new { @class = "text-danger"})
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "return SoloLetras(event, 'lblNombre')" })
+                            @Html.Label("", null, new {@id = "lblNombre"})
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.CURP)  @Html.ValidationMessageFor(model => model.CURP,"",new { @class = "text-danger"})
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-person-rolodex" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", @id = "txtCurp" })
+                            @Html.Label("", null, new { @id = "ldlCurp" })
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.FechaNaacimiento)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-calendar-week" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.FechaNaacimiento, new { @class = "form-control", @id = "txtFechaNacimiento"  })
+                            @Html.ValidationMessageFor(model => model.FechaNaacimiento ,"",new { @class = "text-danger"})
+
+                        </div>
+                    </div>
+
+                </div>
+
+                @*SEGUNDA FILA*@
+
+
+                <div class="row">
+
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.ApellidoPaterno)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" , @onkeypress = "return SoloLetras(event, 'ldlApellidoPaterno')" })
+                            @Html.ValidationMessageFor(model => model.ApellidoPaterno,"", new { @class = "text-danger"})
+                            @Html.Label("", null, new { @id = "ldlApellidoPaterno" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Rol) @Html.ValidationMessageFor(model => model.Rol.IdRol,"",new { @class = "text-danger"})
+                        <div class="input-group mb-3">
+                            <br />
+                            <span class="input-group-text"><i class="bi bi-segmented-nav" style="color: darkred"></i></span>
+                            @*@Html.TextBoxFor(model => model.Semestre.IdSemestre, new { @class = "form-control" })*@
+                            @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona una opción", new { @class = "form-control", @style = "border-color : darkred" })
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Telefono)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-telephone" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono" , @onkeypress = "return SoloNumeros(event, 'ldlTelefono')", @maxlength = "10"  })
+                            @Html.ValidationMessageFor(model => model.Telefono,"",new { @class = "text-danger"})
+                            @Html.Label("", null, new { @id  = "ldlTelefono" })
+                        </div>
+                    </div>
+
+
+                </div>
+
+                @*TERCERA FILA*@
+
+                <div class="row">
+
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.ApellidoMaterno)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" , @onkeypress = "return SoloLetras(event, 'ldlApellidoMaterno')" })
+                            @Html.ValidationMessageFor(model => model.ApellidoMaterno,"", new {@class = "text-danger"})
+                            @Html.Label("", null, new { @id = "ldlApellidoMaterno" })
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Email) @Html.ValidationMessageFor(model => model.Email,"" , new { @class = "text-danger"})
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-envelope-paper" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail" })
+                        </div>
+                        @Html.Label("", null,  new { @id="ldlEmail" } )
+                        @Html.Label("Confirmar Email: ")
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-envelope-paper" style="color: darkred"></i></span>
+                            @Html.TextBox("Confirmar Email",null,new { @class = "form-control", @id = "txtEmailConfirmar", placeholder=" Confirmar Email", @style = "border-color : darkred" } )
+                        </div>
+                        @Html.Label("",null, new { @id= "ldlConfirmarEmail" })
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Password)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-key-fill" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword",@type = "password", placeholder="Password" })
+                            @Html.ValidationMessageFor(model => model.Password,"", new { @class = "text-danger"})
+                        </div>
+                        @Html.Label("Confirmar Contraseña: ")
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-key-fill" style="color: darkred"></i></span>
+                            @Html.TextBox("Confirmar contraseña",null,new { @class = "form-control", @id = "txtPasswordConfirmar",@type = "Password", placeholder=" Confirmar Password", @style = "border-color : darkred" } )
+                        </div>
+                        @Html.Label("",null, new { @id= "ldlPassword" })
+
+                    </div>
+                </div>
+
+
+                <hr />
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        @Html.LabelFor(model=> model.Imagen)
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image" style="color: darkred"></i></span>
+                            <input id="IFImage" type='file' class="form-control" name="IFImage" onchange="validateFile(this), readURL(this);  " />
+                        </div>
+
+                        @if (Model.Imagen == null || Model.Imagen == "")
+                        {
+
+                            //<img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:250px ; height:250px" />
+                            <img id="Img" src="~/Imagenes/UsuarioSinFoto.png" style="width:250px ; height:250px" />
+
+                        }
+                        else
+                        {
+                            //<img id="Img" src="~/Imagenes/SinUsuario.png" style="width:250px ; height:250px" />
+                            <img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:250px ; height:250px" />
+                        }
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <hr />
+                        <input type="submit" value="Guardar" class="btn btn-outline-success btn-lg" />
+                        @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-outline-danger btn-lg" })
+                        <hr />
+                    </div>
+
+                </div>
+
+                @Html.HiddenFor(model => model.Imagen)
+
+                <div class="row">
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    function validateFile() {
+                var allowedExtension = ['png', 'jpg'];
+                var fileExtension = document.getElementById('IFImage').value.split('.').pop().toLowerCase();
+                var isValidFile = false;
+                for (var index in allowedExtension) {
+                    if (fileExtension === allowedExtension[index]) {
+                        isValidFile = true;
+                        break;
+                    }
+                }
+                if (!isValidFile) {
+                    alert('Las extensiones permitidas son : *.' + allowedExtension.join(', *.'));
+                    document.getElementById('IFImage').value = ""
+                }
+                return isValidFile;
+            }
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#Img')
+                            .attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+</script>
+}
+
