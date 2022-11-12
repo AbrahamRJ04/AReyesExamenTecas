@@ -234,4 +234,94 @@ SELECT [IdRol]
 GO
 EXEC RolGetAll
 --------------------------------------------------------------------------------------------------
+---STORED PROCEDURE PARA VISTA DE CUENTAS DEL CLIENTE
+USE [AReyesTecasExamen]
+GO
+CREATE PROCEDURE CuentaGetByIdCliente
+@IdCliente INT
+AS
+BEGIN
+SELECT [IdNumeroCuenta]
+      ,[Nombre]
+      ,[Saldo]
+      ,[FechaCreacion]
+      ,[IdCliente]
+  FROM [dbo].[Cuenta]
+  WHERE IdCliente = @IdCliente
+  END
+GO
+--------------------------------------------------------------------------------------
+EXEC CuentaGetByIdCliente 1
+------------------------------------------------------------------------------------
+
+--CRUD DE CUENTAS
+CREATE PROCEDURE CuentaGetById 1
+@IdNumeroCuenta INT
+AS
+BEGIN
+SELECT [IdNumeroCuenta]
+      ,[Nombre]
+      ,[Saldo]
+      ,[FechaCreacion]
+      ,[IdCliente]
+  FROM [dbo].[Cuenta]
+  WHERE IdNumeroCuenta = @IdNumeroCuenta
+  END
+GO
+--DELETE
+
+USE [AReyesTecasExamen]
+GO
+CREATE PROCEDURE CuentaDelete
+@IdNumeroCuenta INT
+AS
+BEGIN
+DELETE FROM [dbo].[Cuenta]
+      WHERE IdNumeroCuenta = @IdNumeroCuenta
+	  END
+GO
+-- ADD
+USE [AReyesTecasExamen]
+GO
+CREATE PROCEDURE CuentaAdd
+@Nombre VARCHAR(50),
+@Saldo DECIMAL,
+@IdCliente INT
+AS
+BEGIN
+INSERT INTO [dbo].[Cuenta]
+           ([Nombre]
+           ,[Saldo]
+           ,[FechaCreacion]
+           ,[IdCliente])
+     VALUES
+           (@Nombre
+           ,@Saldo
+           ,GETDATE()
+           ,@IdCliente)
+END
+
+GO
+
+EXEC CuentaAdd 'Ahorro Futuro',400,1
+--UPDATE
+
+USE [AReyesTecasExamen]
+GO
+CREATE PROCEDURE CuentaUpdate
+@IdNumeroCuenta INT,
+@Nombre VARCHAR(50),
+@IdCliente INT
+AS
+BEGIN
+
+UPDATE [dbo].[Cuenta]
+   SET [Nombre] = @Nombre
+      ,[IdCliente] = @IdCliente
+ WHERE IdNumeroCuenta = @IdNumeroCuenta
+END
+
+GO
+
+
 

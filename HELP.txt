@@ -1,0 +1,34 @@
+
+CONEXION:
+
+PM> Scaffold-DbContext "Server=LAPTOP-GJD4HQTI; Database= DEspinosaProgramacionNCapas; Trusted_Connection=True; User ID=sa; Password=pass@word1;" Microsoft.EntityFrameworkCore.SqlServer
+
+Data Source=DESKTOP-AVT6ORL\SQLEXPRESS;Initial Catalog=AReyesTecasExamen;Integrated Security=True
+
+Scaffold-DbContext "Data Source=DESKTOP-AVT6ORL\SQLEXPRESS;Initial Catalog=AReyesTecasExamen;Integrated Security=True; Encrypt=False;" Microsoft.EntityFrameworkCore.SqlServer -f
+
+___________________________
+
+GET ALL DE LAS CUENTAS
+
+--> Stored Procedure CuentaGetByIdCleinte
+--> Cuenta Business
+
+[IdNumeroCuenta]
+      ,[Nombre]
+      ,[Saldo]
+      ,[FechaCreacion]
+      ,[IdCliente]
+_____________________________________________
+COMPROBAR MODAL
+
+CRUD CUENTA
+
+GETBYID ---
+ADD -- ya
+DELETE --YA 
+UPDATE --
+
+
+
+

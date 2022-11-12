@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using Business;
+using DataAccess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -98,7 +99,7 @@ namespace Presentation.Controllers
             }
             return PartialView("Modal");
         }
-        
+
 
         [HttpGet]
         public IActionResult GetByIdCuenta(int IdCliente)
@@ -122,9 +123,84 @@ namespace Presentation.Controllers
         [HttpGet]
         public IActionResult AddCuenta(int IdCliente)
         {
-            
+            Business.ControlResult result = Business.Cliente.GetById(IdCliente);
+            if (result.ProcesoCorrecto)
+            {
+                Business.Cliente cliente = new Business.Cliente();
+                cliente = (Business.Cliente)result.Objeto;
+                return View(cliente);
+            }
             return View();
         }
+
+        [HttpPost]
+        public IActionResult AddCuenta(Business.Cliente cliente)
+        {
+            Business.ControlResult result = Business.Cuenta.Add(cliente);
+            if (result.ProcesoCorrecto)
+            {
+                ViewBag.Mensaje = "Cuenta registrada correctamente";
+            }
+            else
+            {
+                ViewBag.Mensaje = "Ocurrio un error al registrar la cuenta de ahorro nueva";
+                
+            }
+            return PartialView("Modal");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateCuenta(int IdCliente, int IdNumeroCuenta)
+        {
+            Business.ControlResult result = Business.Cliente.GetById(IdCliente);
+            if (result.ProcesoCorrecto)
+            {
+                Business.ControlResult result1 = Business.Cuenta.GetById(IdNumeroCuenta);
+                if(result1.ProcesoCorrecto)
+                {
+                    Business.Cliente cliente = new Business.Cliente();
+                    cliente = (Business.Cliente)result.Objeto;
+                    cliente.Cuenta = (Business.Cuenta)result1.Objeto;
+                    return View(cliente);
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCuenta(Business.Cliente cliente)
+        {
+            Business.ControlResult result = Business.Cuenta.Update(cliente);
+            if (result.ProcesoCorrecto)
+            {
+                ViewBag.Mensaje = "Cuenta Actualizada  correctamente";
+
+            }
+            else
+            {
+                ViewBag.Mensaje = "Ocurrio un error al actualizar la cuenta de ahorro";
+
+            }
+            return PartialView("Modal");
+            
+        }
+
+        [HttpGet]
+        public IActionResult DeleteCuenta(int IdNumeroCuenta)
+        {
+            Business.ControlResult result = Business.Cuenta.Delete(IdNumeroCuenta);
+            if(result.ProcesoCorrecto)
+            {
+                ViewBag.Mensaje = "Cuenta eliminada correctamente";
+            }
+            else
+            {
+                ViewBag.Mensaje = "Ocurrio un error al registrar la cuenta de ahorro nueva";
+            }
+            return PartialView("Modal");
+            
+        }
+
         public static byte[] ConvertToBytes(IFormFile imagen)
         {
 

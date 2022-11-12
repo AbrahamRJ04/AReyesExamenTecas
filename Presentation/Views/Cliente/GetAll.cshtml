@@ -60,15 +60,11 @@
 
                     @if (cliente.Imagen == null || cliente.Imagen == "")
                     {
-                        //<img src="data:image/*;base64,@usuario.Imagen" style="width:100px; height:80px" />
                         <img src="~/Imagenes/UsuarioSinFoto.png" style="width:100px; height:80px" />
-
                     }
                     else
                     {
-                        //<img src="~/Imagenes/SinUsuario.png" style="width:100px; height:80px" />S
                         <img src="data:image/*;base64,@cliente.Imagen" style="width:100px; height:80px" />
-
                     }
                 </td>
                 <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Cliente", new { IdCliente= cliente.IdCliente})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3-fill"></i></a></td>

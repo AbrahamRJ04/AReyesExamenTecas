@@ -37,13 +37,13 @@
         @foreach (Business.Cuenta cliente in Model.Cuenta.Cuentas)
         {
             <tr>
-                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Cliente", new { IdCliente = cliente.IdCliente })"><i class="bi bi-pencil-square"></i></a></td>
-                <td style="visibility:collapse; display:none;">@cliente.IdNumeroCuneta</td>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("UpdateCuenta", "Cliente", new { IdCliente = cliente.IdCliente, IdNumeroCuenta = cliente.IdNumeroCuenta })"><i class="bi bi-pencil-square"></i></a></td>
+                <td style="visibility:collapse; display:none;">@cliente.IdNumeroCuenta</td>
                 <td>@cliente.Nombre </td>
                 <td>$ @cliente.Saldo</td>
                 <td>@cliente.FechaCreacion</td>
                 <td style="visibility:collapse; display:none;">@cliente.IdCliente</td>
-                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Cliente", new { IdCliente= cliente.IdCliente})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3-fill"></i></a></td>
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("DeleteCuenta", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3-fill"></i></a></td>
             </tr>
         }
 

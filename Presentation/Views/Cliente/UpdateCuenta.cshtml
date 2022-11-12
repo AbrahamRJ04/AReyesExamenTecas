@@ -1,0 +1,68 @@
+﻿@model Business.Cliente
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="row">
+
+    <div class="container">
+        <div class="col-md-12">
+            <h2>EDITAR UNA CUENTA PARA: @Model.Nombre @Model.ApellidoPaterno @Model.ApellidoMaterno</h2>
+            <br />
+            <h5>Ingrese los datos de la cuenta: @Model.Cuenta.Nombre</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @*Crea un salto de linea*@
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("UpdateCuenta", "Cliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div style="visibility:collapse; display:none;">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.IdCliente)
+                        @Html.TextBoxFor(model => model.IdCliente, new { @class = "form-control", @id = "txtIdCliente" })
+                        @Html.ValidationMessageFor(model => model.IdCliente)
+
+                    </div>
+                </div>
+                <div style="visibility:collapse; display:none;">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Cuenta.IdNumeroCuenta)
+                        @Html.TextBoxFor(model => model.Cuenta.IdNumeroCuenta, new { @class = "form-control", @id = "txtIdCliente" })
+                        @Html.ValidationMessageFor(model => model.Cuenta.IdNumeroCuenta)
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Cuenta.Nombre) @Html.ValidationMessageFor(model => model.Cuenta.Nombre,"", new { @class = "text-danger"})
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                            @Html.TextBoxFor(model => model.Cuenta.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "return SoloLetras(event, 'lblNombre')" })
+                            @Html.Label("", null, new {@id = "lblNombre"})
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <hr />
+                    <input type="submit" value="Guardar" class="btn btn-outline-success btn-lg" />
+                    @*@Html.ActionLink("Regresar", "GetAll", "Cliente", htmlAttributes: new { @class = "btn btn-outline-danger btn-lg" })*@
+                    @Html.ActionLink("Regresar", "GetByIdCuenta", "Cliente",new { IdCliente = @Model.IdCliente },new{@class = "btn btn-outline-danger btn-lg"})
+                    <hr />
+                </div>
+            }
+        </div>
+    </div>
+</div>
