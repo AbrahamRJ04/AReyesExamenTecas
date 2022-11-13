@@ -38,4 +38,6 @@ public partial class HistorialTransaccione
     public string? TipoRol { get; set; }
 
     public decimal MontoTransaccion { get; set; }
+
+
 }

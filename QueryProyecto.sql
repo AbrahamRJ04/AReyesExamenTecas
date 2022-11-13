@@ -323,5 +323,118 @@ END
 
 GO
 
+-----------------------------------------------------------
+--GetAll Tipo Transaccion
+USE [AReyesTecasExamen]
+GO
+CREATE PROCEDURE TipoTransaccionGetById
+@IdTipoTransaccion INT
+AS
+BEGIN
+SELECT [IdTipoTransaccion]
+      ,[Nombre]
+  FROM [dbo].[TipoTransaccion]
+  WHERE IdTipoTransaccion = @IdTipoTransaccion
+END
+GO
+----------------------------------------------------------------
 
 
+--stored procedure Deposito
+USE [AReyesTecasExamen]
+GO
+CREATE PROCEDURE AccionTransaccion 
+@IdTipoTransaccion INT,
+@Detalle VARCHAR(MAX),
+@IdNumeroCuenta INT,
+@MontoTransaccion DECIMAL,
+@Saldo DECIMAL
+AS
+BEGIN
+INSERT INTO [dbo].[Transaccion]
+           ([IdTipoTransaccion]
+           ,[Detalle]
+           ,[FechaTransaccion]
+           ,[IdNumeroCuenta]
+           ,[MontoTransaccion])
+     VALUES
+           (@IdTipoTransaccion
+           ,@Detalle
+           ,GETDATE()
+           ,@IdNumeroCuenta
+           ,@MontoTransaccion)
+END
+
+UPDATE [dbo].[Cuenta]
+   SET 
+      [Saldo] = @Saldo
+ WHERE IdNumeroCuenta = @IdNumeroCuenta
+GO
+
+
+EXEC Deposito 1,'detalle',numcuenta,monto,saldo
+
+
+----------------------------------------------------------
+
+SELECT * FROM Transaccion
+-----------------------------------------------------------------------------------------------
+
+--VISTA 
+USE [AReyesTecasExamen]
+GO
+CREATE VIEW HistorialTransacciones
+AS
+SELECT Transaccion.[IdTransaccion]
+      ,Transaccion.[IdTipoTransaccion]
+	  ,TipoTransaccion.Nombre AS Transaccion
+      ,Transaccion.[Detalle]
+      ,Transaccion.[FechaTransaccion]
+      ,Cuenta.[IdNumeroCuenta]
+	  ,Cuenta.Nombre AS NombreDeCuenta
+	  ,Cuenta.Saldo
+	  ,Cuenta.FechaCreacion
+	  ,Cliente.IdCliente
+	  ,Cliente.Nombre
+	  ,Cliente.ApellidoPaterno
+	  ,Cliente.ApellidoMaterno
+	  ,Cliente.NumeroCliente
+	  ,Cliente.IdRol
+	  ,Rol.Nombre AS TipoRol
+      ,Transaccion.[MontoTransaccion]
+  FROM [dbo].[Transaccion]
+  INNER JOIN TipoTransaccion on TipoTransaccion.IdTipoTransaccion = Transaccion.IdTipoTransaccion
+  INNER JOIN Cuenta on Transaccion.IdNumeroCuenta = Cuenta.IdNumeroCuenta
+  INNER JOIN Cliente on Cuenta.IdCliente = Cliente.IdCliente
+  INNER JOIN Rol on Rol.IdRol = Cliente.IdRol
+GO
+-----------------------------------------------------------------------------------------
+SELECT * FROM HistorialTransacciones
+
+USE [AReyesTecasExamen]
+GO
+CREATE PROCEDURE HistorialGetById 1
+@IdCliente INT
+AS
+BEGIN
+SELECT [IdTransaccion]
+      ,[IdTipoTransaccion]
+      ,[Transaccion]
+      ,[Detalle]
+      ,[FechaTransaccion]
+      ,[IdNumeroCuenta]
+      ,[NombreDeCuenta]
+      ,[Saldo]
+      ,[FechaCreacion]
+      ,[IdCliente]
+      ,[Nombre]
+      ,[ApellidoPaterno]
+      ,[ApellidoMaterno]
+      ,[NumeroCliente]
+      ,[IdRol]
+      ,[TipoRol]
+      ,[MontoTransaccion]
+  FROM [dbo].[HistorialTransacciones]
+  WHERE [HistorialTransacciones].IdCliente = @IdCliente
+  END
+GO

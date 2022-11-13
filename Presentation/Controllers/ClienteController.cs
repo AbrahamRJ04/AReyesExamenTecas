@@ -326,7 +326,45 @@ namespace Presentation.Controllers
             return PartialView("Modal");
 
         }
+        [HttpGet]
+        public IActionResult HistorialGetByIdCliente(int IdCliente)
+        {
+            Business.ControlResult result = Business.HistorialTransacciones.GetByIdCliente(IdCliente);
+            if (result.ProcesoCorrecto)
+            {
+                Business.Cliente cliente = new Business.Cliente();
+                cliente.Historial = new Business.HistorialTransacciones();
+                cliente.Historial.Transacciones = result.Objetos;
 
+                return View(cliente);
+            }
+            else
+            {
+                ViewBag.Mensaje = "Ocurrio un error al realizar busqueda: " + result.MensajeError;
+                return PartialView("Modal");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult HistorialGetByIdCuenta(int IdNumeroCuenta)
+        {
+            Business.ControlResult result = Business.HistorialTransacciones.GetByIdNumeroCuenta(IdNumeroCuenta);
+            if (result.ProcesoCorrecto)
+            {
+                Business.Cliente cliente = new Business.Cliente();
+                cliente.Historial = new Business.HistorialTransacciones();
+                cliente.Historial.Transacciones = result.Objetos;
+
+                return View(cliente);
+            }
+            else
+            {
+                ViewBag.Mensaje = "Ocurrio un error al realizar busqueda: " + result.MensajeError;
+                return PartialView("Modal");
+            }
+            return View();
+        }
         public static byte[] ConvertToBytes(IFormFile imagen)
         {
 

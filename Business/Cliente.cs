@@ -24,6 +24,7 @@ namespace Business
         public Business.Rol Rol { get; set; }
         public List<Object> Clientes { get; set; }
         public Business.Cuenta Cuenta { get; set; }
+        public Business.HistorialTransacciones Historial { get; set; }
 
         //METODOS CLIENTE
 
