@@ -4,7 +4,7 @@ USE AReyesTecasExamen
 
 CREATE TABLE Rol
 (
-IdRo INT PRIMARY KEY IDENTITY(1,1),
+IdRol INT PRIMARY KEY IDENTITY(1,1),
 Nombre VARCHAR(25)
 )
 
@@ -145,7 +145,7 @@ INSERT INTO [dbo].[Cliente]
            ,@ApellidoMaterno
            ,@Email
            ,@Password
-           ,CONVERT(DATE,@FechaNacimiento,105)
+           ,CONVERT(DATE,@FechaNacimiento,105)--DD-MM-YYYY
            ,@Telefono
            ,@CURP
            ,@Imagen
@@ -255,6 +255,7 @@ EXEC CuentaGetByIdCliente 1
 ------------------------------------------------------------------------------------
 
 --CRUD DE CUENTAS
+
 CREATE PROCEDURE CuentaGetById 1
 @IdNumeroCuenta INT
 AS
@@ -338,8 +339,6 @@ SELECT [IdTipoTransaccion]
 END
 GO
 ----------------------------------------------------------------
-
-
 --stored procedure Deposito
 USE [AReyesTecasExamen]
 GO
@@ -413,7 +412,7 @@ SELECT * FROM HistorialTransacciones
 
 USE [AReyesTecasExamen]
 GO
-CREATE PROCEDURE HistorialGetById 1
+CREATE PROCEDURE HistorialGetById 17
 @IdCliente INT
 AS
 BEGIN
@@ -438,3 +437,59 @@ SELECT [IdTransaccion]
   WHERE [HistorialTransacciones].IdCliente = @IdCliente
   END
 GO
+--------------------------------------------------------------------------
+--Historial para cuentas en especifico
+
+
+USE [AReyesTecasExamen]
+GO
+CREATE PROCEDURE HistorialGetByIdCuenta
+@IdNumeroCuenta INT
+AS
+BEGIN
+SELECT [IdTransaccion]
+      ,[IdTipoTransaccion]
+      ,[Transaccion]
+      ,[Detalle]
+      ,[FechaTransaccion]
+      ,[IdNumeroCuenta]
+      ,[NombreDeCuenta]
+      ,[Saldo]
+      ,[FechaCreacion]
+      ,[IdCliente]
+      ,[Nombre]
+      ,[ApellidoPaterno]
+      ,[ApellidoMaterno]
+      ,[NumeroCliente]
+      ,[IdRol]
+      ,[TipoRol]
+      ,[MontoTransaccion]
+  FROM [dbo].[HistorialTransacciones]
+  WHERE [HistorialTransacciones].IdNumeroCuenta = @IdNumeroCuenta
+  END
+GO
+
+----------------------------------------------------------------------------------
+--- GET DE LOGIN
+CREATE PROCEDURE ClienteByIdNumeroCliente
+@NumeroCliente VARCHAR(50)
+AS
+BEGIN
+SELECT Cliente.[IdCliente]
+      ,Cliente.[Nombre]
+      ,Cliente.[ApellidoPaterno]
+      ,Cliente.[ApellidoMaterno]
+      ,Cliente.[NumeroCliente]
+      ,Cliente.[Email]
+      ,Cliente.[Password]
+      ,Cliente.[FechaNacimiento]
+      ,Cliente.[Telefono]
+      ,Cliente.[CURP]
+      ,Cliente.[Imagen]
+      ,Cliente.[IdRol]
+	  ,Rol.Nombre as TipoRol
+  FROM [dbo].[Cliente] INNER JOIN Rol on Cliente.IdRol = Rol.IdRol
+  WHERE NumeroCliente = @NumeroCliente
+  END
+
+  SELECT * FROM Cliente
