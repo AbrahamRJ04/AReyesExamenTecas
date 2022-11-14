@@ -40,7 +40,7 @@
                     <div class="col-md-6">
                         @Html.LabelFor(model => model.Cuenta.Nombre) @Html.ValidationMessageFor(model => model.Cuenta.Nombre,"", new { @class = "text-danger"})
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.Cuenta.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "return SoloLetras(event, 'lblNombre')" })
                             @Html.Label("", null, new {@id = "lblNombre"})
                         </div>
@@ -50,10 +50,10 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.Cuenta.Saldo)
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-telephone" style="color: darkred"></i></span>
-                            @Html.TextBoxFor(model => model.Cuenta.Saldo, new { @class = "form-control", @id = "txtTelefono" , @onkeypress = "return SoloNumeros(event, 'ldlTelefono')", @maxlength = "10"  })
+                            <span class="input-group-text"><i class="bi bi-telephone" style="color: darkblue"></i></span>
+                            @Html.TextBoxFor(model => model.Cuenta.Saldo, new { @class = "form-control", @id = "txtTelefono" , @onkeypress = "return SoloNumeros(event, 'ldlSaldo')", @maxlength = "10"  })
                             @Html.ValidationMessageFor(model => model.Cuenta.Saldo,"",new { @class = "text-danger"})
-                            @Html.Label("", null, new { @id  = "ldlTelefono" })
+                            @Html.Label("", null, new { @id  = "ldlSaldo" })
                         </div>
                     </div>
 
@@ -69,3 +69,53 @@
         </div>
     </div>
 </div>
+@section Scripts
+    {
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+
+    @*esta, esta la referencia a jquery porque nuestro proyecto ya tiene la libreria, de ahi la tomamos*@
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    @*las dos de abajo son la referencia para los estilos del datepicker, se sacan de la pagina de jquery ahi no hay detalle*@
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>>
+
+    <script>
+        function SoloLetras(e, controlId) {
+            var caracter = e.key;
+            if (!/^[a-zA-Z\s]*$/.test(caracter)) {
+                $('#' + controlId).text("Solo se aceptan Letras");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+        }
+    </script>
+
+    <script>
+        function SoloNumeros(e, controlId) {
+            var caracter = e.key;
+            if (!/^[0-9]*$/.test(caracter)) {
+                $('#' + controlId).text("Solo se aceptan Numeros");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+        }
+    </script>
+
+
+}

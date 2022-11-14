@@ -40,7 +40,7 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.Nombre) @Html.ValidationMessageFor(model => model.Nombre,"", new { @class = "text-danger"})
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "return SoloLetras(event, 'lblNombre')" })
                             @Html.Label("", null, new {@id = "lblNombre"})
                         </div>
@@ -51,7 +51,7 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.CURP)  @Html.ValidationMessageFor(model => model.CURP,"",new { @class = "text-danger"})
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-person-rolodex" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-person-rolodex" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", @id = "txtCurp" })
                             @Html.Label("", null, new { @id = "ldlCurp" })
 
@@ -61,7 +61,7 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.FechaNaacimiento)
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-calendar-week" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-calendar-week" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.FechaNaacimiento, new { @class = "form-control", @id = "txtFechaNacimiento"  })
                             @Html.ValidationMessageFor(model => model.FechaNaacimiento ,"",new { @class = "text-danger"})
 
@@ -79,7 +79,7 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.ApellidoPaterno)
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" , @onkeypress = "return SoloLetras(event, 'ldlApellidoPaterno')" })
                             @Html.ValidationMessageFor(model => model.ApellidoPaterno,"", new { @class = "text-danger"})
                             @Html.Label("", null, new { @id = "ldlApellidoPaterno" })
@@ -90,7 +90,7 @@
                         @Html.LabelFor(model => model.Rol) @Html.ValidationMessageFor(model => model.Rol.IdRol,"",new { @class = "text-danger"})
                         <div class="input-group mb-3">
                             <br />
-                            <span class="input-group-text"><i class="bi bi-segmented-nav" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-segmented-nav" style="color: darkblue"></i></span>
                             @*@Html.TextBoxFor(model => model.Semestre.IdSemestre, new { @class = "form-control" })*@
                             @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona una opción", new { @class = "form-control", @style = "border-color : darkred" })
 
@@ -100,7 +100,7 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.Telefono)
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-telephone" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-telephone" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono" , @onkeypress = "return SoloNumeros(event, 'ldlTelefono')", @maxlength = "10"  })
                             @Html.ValidationMessageFor(model => model.Telefono,"",new { @class = "text-danger"})
                             @Html.Label("", null, new { @id  = "ldlTelefono" })
@@ -118,7 +118,7 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.ApellidoMaterno)
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-file-person" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" , @onkeypress = "return SoloLetras(event, 'ldlApellidoMaterno')" })
                             @Html.ValidationMessageFor(model => model.ApellidoMaterno,"", new {@class = "text-danger"})
                             @Html.Label("", null, new { @id = "ldlApellidoMaterno" })
@@ -129,14 +129,14 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.Email) @Html.ValidationMessageFor(model => model.Email,"" , new { @class = "text-danger"})
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-envelope-paper" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-envelope-paper" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail" })
                         </div>
                         @Html.Label("", null,  new { @id="ldlEmail" } )
                         @Html.Label("Confirmar Email: ")
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-envelope-paper" style="color: darkred"></i></span>
-                            @Html.TextBox("Confirmar Email",null,new { @class = "form-control", @id = "txtEmailConfirmar", placeholder=" Confirmar Email", @style = "border-color : darkred" } )
+                            <span class="input-group-text"><i class="bi bi-envelope-paper" style="color: darkblue"></i></span>
+                            @Html.TextBox("Confirmar Email",null,new { @class = "form-control", @id = "txtEmailConfirmar", placeholder=" Confirmar Email", @style = "border-color : darkblue" } )
                         </div>
                         @Html.Label("",null, new { @id= "ldlConfirmarEmail" })
                     </div>
@@ -144,14 +144,14 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.Password)
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-key-fill" style="color: darkred"></i></span>
+                            <span class="input-group-text"><i class="bi bi-key-fill" style="color: darkblue"></i></span>
                             @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword",@type = "password", placeholder="Password" })
                             @Html.ValidationMessageFor(model => model.Password,"", new { @class = "text-danger"})
                         </div>
                         @Html.Label("Confirmar Contraseña: ")
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-key-fill" style="color: darkred"></i></span>
-                            @Html.TextBox("Confirmar contraseña",null,new { @class = "form-control", @id = "txtPasswordConfirmar",@type = "Password", placeholder=" Confirmar Password", @style = "border-color : darkred" } )
+                            <span class="input-group-text"><i class="bi bi-key-fill" style="color: darkblue"></i></span>
+                            @Html.TextBox("Confirmar contraseña",null,new { @class = "form-control", @id = "txtPasswordConfirmar",@type = "Password", placeholder=" Confirmar Password", @style = "border-color : darkblue" } )
                         </div>
                         @Html.Label("",null, new { @id= "ldlPassword" })
 
@@ -168,7 +168,7 @@
                         @Html.LabelFor(model=> model.Imagen)
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image" style="color: darkred"></i></span>
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image" style="color: darkblue"></i></span>
                             <input id="IFImage" type='file' class="form-control" name="IFImage" onchange="validateFile(this), readURL(this);  " />
                         </div>
 
@@ -240,5 +240,87 @@
             }
 
 </script>
+
+    <script>
+        $(function () {
+            $("#txtFechaNacimiento").datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true,
+                changeYear: true
+            }).val();
+        });
+    </script>
+
+    <script>
+        $("#txtEmail").blur(function () {
+            var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            var emailaddress = $("#txtEmail").val();
+            if (!emailReg.test(emailaddress))
+                $("#ldlEmail").html('<font color="#cc0000">Porfavor ingrese un Email valido.</font>');
+            else
+                $("#ldlEmail").html('<font color="#cc0000"></font>');
+        });
+    </script>
+    <script>
+        $("#txtCurp").blur(function () {
+            var curpReg = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/;
+            var curpladdress = $("#txtCurp").val();
+            if (!curpReg.test(curpladdress))
+                $("#ldlCurp").html('<font color="#cc0000">Porfavor ingrese un Curp valido.</font>');
+            else
+                $("#ldlCurp").html('<font color="#cc0000"></font>');
+        });
+    </script>
+
+    <script>
+        $('#txtPassword, #txtPasswordConfirmar').on('keyup', function () {
+            if ($('#txtPassword').val() == $('#txtPasswordConfirmar').val()) {
+                $('#ldlPassword').html('Contraseña Valida').css('color', 'green');
+            } else
+                $('#ldlPassword').html('Las Contraseñas no coinciden').css('color', 'red');
+        });
+    </script>
+
+    <script>
+        $('#txtEmail, #txtEmailConfirmar').on('keyup', function () {
+            if ($('#txtEmail').val() == $('#txtEmailConfirmar').val()) {
+                $('#ldlConfirmarEmail').html('Email confirmado').css('color', 'green');
+            } else
+                $('#ldlConfirmarEmail').html('Los Email con coinciden').css('color', 'red');
+        });
+    </script>
+
+
+
+    <script>
+        function SoloLetras(e, controlId) {
+            var caracter = e.key;
+            if (!/^[a-zA-Z\s]*$/.test(caracter)) {
+                $('#' + controlId).text("Solo se aceptan Letras");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+        }
+    </script>
+
+    <script>
+        function SoloNumeros(e, controlId) {
+            var caracter = e.key;
+            if (!/^[0-9]*$/.test(caracter)) {
+                $('#' + controlId).text("Solo se aceptan Numeros");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+        }
+    </script>
+
 }
 
