@@ -120,6 +120,7 @@ namespace Presentation.Controllers
             }
             return View();
         }
+
         [HttpGet]
         public IActionResult AddCuenta(int IdCliente)
         {

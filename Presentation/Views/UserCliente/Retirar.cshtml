@@ -1,0 +1,112 @@
+﻿@model Business.Cliente
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Presentation</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Presentation.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <br />
+            <div class="row">
+
+                <div class="container">
+                    <div class="col-md-12">
+                        <h2>Transaccion: @Model.Cuenta.Transaccion.TipoTransaccion.Nombre</h2>
+                        <br />
+                        <h3>Cuenta: @Model.Cuenta.Nombre  --  Cliente: @Model.Nombre @Model.ApellidoPaterno @Model.ApellidoMaterno</h3>
+                        <br />
+                        <h3>SALDO DE LA CUENTA:  $@Model.Cuenta.Saldo .00</h3>
+                        <h5>Ingrese los datos de la transaccion:</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @*Crea un salto de linea*@
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("Retirar", "UserCliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+                            <div style="visibility:collapse; display:none;">
+                                <div class="col-md-4 col-12 col-sm-6">
+                                    @Html.LabelFor(model => model.IdCliente)
+                                    @Html.TextBoxFor(model => model.IdCliente, new { @class = "form-control", @id = "txtIdCliente" })
+                                    @Html.ValidationMessageFor(model => model.IdCliente)
+
+                                </div>
+                            </div>
+                            <div style="visibility:collapse; display:none;">
+                                <div class="col-md-4 col-12 col-sm-6">
+                                    @Html.LabelFor(model => model.Cuenta.Transaccion.IdTransaccion)
+                                    @Html.TextBoxFor(model => model.Cuenta.Transaccion.IdTransaccion, new { @class = "form-control", @id = "txtIdTransaccion" })
+                                    @Html.ValidationMessageFor(model => model.Cuenta.Transaccion.IdTransaccion)
+
+                                </div>
+                            </div>
+                            <div style="visibility:collapse; display:none;">
+                                <div class="col-md-4 col-12 col-sm-6">
+                                    @Html.LabelFor(model => model.Cuenta.IdNumeroCuenta)
+                                    @Html.TextBoxFor(model => model.Cuenta.IdNumeroCuenta, new { @class = "form-control", @id = "txtIdNumeroCuenta" })
+                                    @Html.ValidationMessageFor(model => model.Cuenta.IdNumeroCuenta)
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.Cuenta.Transaccion.Detalle) @Html.ValidationMessageFor(model => model.Cuenta.Transaccion.Detalle,"", new { @class = "text-danger"})
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="bi bi-file-person" style="color: darkred"></i></span>
+                                        @Html.TextBoxFor(model => model.Cuenta.Transaccion.Detalle, new { @class = "form-control", @id = "txtDetalle", @onkeypress = "return SoloLetras(event, 'lblNombre')" })
+                                        @Html.Label("", null, new {@id = "lblDetalle"})
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.Cuenta.Transaccion.MontoTransaccion)
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="bi bi-telephone" style="color: darkred"></i></span>
+                                        @Html.TextBoxFor(model => model.Cuenta.Transaccion.MontoTransaccion, new { @class = "form-control", @id = "txtMontoTransaccion" , @onkeypress = "return SoloNumeros(event, 'ldlTelefono')", @maxlength = "10"  })
+                                        @Html.ValidationMessageFor(model => model.Cuenta.Transaccion.MontoTransaccion,"",new { @class = "text-danger"})
+                                        @Html.Label("", null, new { @id  = "ldlMontoTransaccion" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <hr />
+                                    <input type="submit" value="RETIRAR" class="btn btn-outline-success btn-lg" />
+                                    @Html.ActionLink("CANCELAR", "GetByIdCuenta", "UserCliente", new { IdCliente = @Model.IdCliente }, new { @class = "btn btn-success" })
+                                    <hr />
+                                </div>
+                            </div>
+
+
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

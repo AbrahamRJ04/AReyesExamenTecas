@@ -19,6 +19,7 @@
 <body>
     <div class="container">
         <main role="main" class="pb-3">
+            <br />
             <h2>LISTA DE CUENTAS DE: @Model.Nombre @Model.ApellidoPaterno @Model.ApellidoMaterno</h2>
             <br />
             <div class="row">
@@ -31,7 +32,7 @@
             <hr />
 
             <div style="float:right;">
-                @Html.ActionLink("+", "AddCuenta", "Cliente",new { IdCliente = @Model.IdCliente },new{@class = "btn btn-success"})
+                @Html.ActionLink("+", "AddCuenta", "UserCliente",new { IdCliente = @Model.IdCliente },new{@class = "btn btn-success"})
                 <hr />
             </div>
 
@@ -55,35 +56,30 @@
                     @foreach (Business.Cuenta cliente in Model.Cuenta.Cuentas)
                     {
                         <tr>
-                            <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("UpdateCuenta", "Cliente", new { IdCliente = cliente.IdCliente, IdNumeroCuenta = cliente.IdNumeroCuenta })"><i class="bi bi-pencil-square"></i></a></td>
+                            <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("UpdateCuenta", "UserCliente", new { IdCliente = cliente.IdCliente, IdNumeroCuenta = cliente.IdNumeroCuenta })"><i class="bi bi-pencil-square"></i></a></td>
                             <td style="visibility:collapse; display:none;">@cliente.IdNumeroCuenta</td>
                             <td>@cliente.Nombre </td>
                             <td>$ @cliente.Saldo</td>
                             <td>@cliente.FechaCreacion</td>
                             <td style="visibility:collapse; display:none;">@cliente.IdCliente</td>
-                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Depositar", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta, IdCliente = cliente.IdCliente})"><i class="bi bi-trash3-fill"></i></a></td>
-                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Retirar", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta , IdCliente = cliente.IdCliente})" onclick="return confirm('Decea retirar saldo de esta cuenta?');"><i class="bi bi-trash3-fill"></i></a></td>
-                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("HistorialGetByIdCuenta", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta , IdCliente = cliente.IdCliente})"><i class="bi bi-trash3-fill"></i></a></td>
-                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("DeleteCuenta", "Cliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3-fill"></i></a></td>
+                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Depositar", "UserCliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta, IdCliente = cliente.IdCliente})"><i class="bi bi-trash3-fill"></i></a></td>
+                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Retirar", "UserCliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta , IdCliente = cliente.IdCliente})" onclick="return confirm('Decea retirar saldo de esta cuenta?');"><i class="bi bi-trash3-fill"></i></a></td>
+                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("HistorialGetByIdCuenta", "UserCliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta , IdCliente = cliente.IdCliente})"><i class="bi bi-trash3-fill"></i></a></td>
+                            <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("DeleteCuenta", "UserCliente", new { IdNumeroCuenta = cliente.IdNumeroCuenta})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-trash3-fill"></i></a></td>
                         </tr>
                     }
 
                 </tbody>
             </table>
             <hr />
-            <div style="float:right;">
+            <div style="float:center;">
                 <h5>Seleccione para visalizar su Historial de transacciones</h5>
-                @Html.ActionLink("Historial", "HistorialGetByIdCliente", "Cliente",new { IdCliente = @Model.IdCliente },new{@class = "btn btn-success"})
+                @Html.ActionLink("Historial", "HistorialGetByIdCliente", "UserCliente",new { IdCliente = @Model.IdCliente },new{@class = "btn btn-success"})
                 <hr />
             </div>
 
         </main>
     </div>
-    
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Presentation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+   
 </body>
 </html>
