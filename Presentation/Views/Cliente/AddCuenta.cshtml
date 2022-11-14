@@ -50,8 +50,8 @@
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.Cuenta.Saldo)
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-telephone" style="color: darkblue"></i></span>
-                            @Html.TextBoxFor(model => model.Cuenta.Saldo, new { @class = "form-control", @id = "txtTelefono" , @onkeypress = "return SoloNumeros(event, 'ldlSaldo')", @maxlength = "10"  })
+                            <span class="input-group-text"><i class="bi bi-currency-dollar" style="color: darkblue"></i></span>
+                            @Html.TextBoxFor(model => model.Cuenta.Saldo, new { @class = "form-control", @id = "txtSaldo" , @onkeypress = "return SoloNumeros(event, 'ldlSaldo')", @maxlength = "10"  })
                             @Html.ValidationMessageFor(model => model.Cuenta.Saldo,"",new { @class = "text-danger"})
                             @Html.Label("", null, new { @id  = "ldlSaldo" })
                         </div>

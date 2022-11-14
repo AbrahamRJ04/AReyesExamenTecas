@@ -74,7 +74,7 @@
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.Cuenta.Transaccion.Detalle) @Html.ValidationMessageFor(model => model.Cuenta.Transaccion.Detalle,"", new { @class = "text-danger"})
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text"><i class="bi bi-file-person" style="color: darkblue"></i></span>
+                                        <span class="input-group-text"><i class="bi bi-blockquote-left" style="color: darkblue"></i></span>
                                         @Html.TextBoxFor(model => model.Cuenta.Transaccion.Detalle, new { @class = "form-control", @id = "txtDetalle", @onkeypress = "return SoloLetras(event, 'ldlDetalle')" })
                                         @Html.Label("", null, new {@id = "lblDetalle"})
                                     </div>
@@ -84,7 +84,7 @@
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.Cuenta.Transaccion.MontoTransaccion)
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text"><i class="bi bi-telephone" style="color: darkblue"></i></span>
+                                        <span class="input-group-text"><i class="bi bi-currency-dollar" style="color: darkblue"></i></span>
                                         @Html.TextBoxFor(model => model.Cuenta.Transaccion.MontoTransaccion, new { @class = "form-control", @id = "txtMontoTransaccion" , @onkeypress = "return SoloNumeros(event, 'ldlMontoTransaccion')", @maxlength = "10"  })
                                         @Html.ValidationMessageFor(model => model.Cuenta.Transaccion.MontoTransaccion,"",new { @class = "text-danger"})
                                         @Html.Label("", null, new { @id  = "ldlMontoTransaccion" })
