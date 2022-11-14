@@ -200,11 +200,11 @@ namespace Presentation.Controllers
                     Business.ControlResult result = Business.Transaccion.Depositar(cliente);
                     if (result.ProcesoCorrecto)
                     {
-                        ViewBag.Mensaje = "Deposito realizado con exito";
+                        ViewBag.Mensaje = "Retiro realizado con exito";
                     }
                     else
                     {
-                        ViewBag.Mensaje = "Ocurrio un error al realizar el deposito. " + result.exception;
+                        ViewBag.Mensaje = "Ocurrio un error al realizar el retiro. " + result.exception;
                     }
                 }
                 else
